@@ -20,7 +20,6 @@ endif
 call plug#end()
 
 
-
 " Global Sets """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on            " Enable syntax highlight
 set nu               " Enable line numbers
@@ -127,10 +126,12 @@ nmap <C-a> :NERDTreeToggle<CR>
 
 " ALE """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ale_linters = {
+\   'python': ['flake8', 'pyright'],
 \}
 
 let g:ale_fixers = {
 \   '*': ['trim_whitespace'],
+\   'python': ['black'],
 \}
 
 let g:ale_fix_on_save = 1
@@ -145,6 +146,12 @@ if (has("nvim"))
     nnoremap <leader>fb <cmd>Telescope buffers<cr>
     nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 endif
+
+
+
+" Python """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_python_flake8_options = '--max-line-length=100 --extend-ignore=E203'
+let g:ale_python_black_options = '--line-length 100'
 
 
 
